@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://c4ej17gt58q4g"]
+[gd_scene load_steps=63 format=3 uid="uid://c4ej17gt58q4g"]
 
 [ext_resource type="Texture2D" uid="uid://bxrw8fmfm3vx0" path="res://art/Dacian Warrior Animated Pixel-Art 2D/Attack/50x50/Attack 0-1 Sprite Sheet.png" id="1_2fvbb"]
 [ext_resource type="Script" uid="uid://c3sugbe24ht57" path="res://script/player.gd" id="1_ml7e8"]
@@ -224,7 +224,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"air_attack",
-"speed": 4.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -410,12 +410,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ihjo1"]
 radius = 6.0827627
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ml7e8"]
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_ml7e8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0fmm8")
-animation = &"weapon_run"
+animation = &"air_attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 14)
@@ -428,3 +430,12 @@ limit_left = 3
 limit_top = -4
 limit_right = 607
 limit_bottom = 301
+
+[node name="DealDamageZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DealDamageZone"]
+position = Vector2(14, 1)
+shape = SubResource("CircleShape2D_ml7e8")
+disabled = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
