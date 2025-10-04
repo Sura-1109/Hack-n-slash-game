@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
-const speed = 200
+class_name BatEnemy
+
+
+const speed = 300
 var dir: Vector2
 
 var is_bat_chase: bool
@@ -13,11 +16,19 @@ var health_min = 0
 var dead = false
 var taking_damage = false
 var is_roaming: bool
+var damage_to_deal = 20
 
 func _ready():
 	is_bat_chase = true
 	
 func _process(delta):
+	Global.batDamageAmount = damage_to_deal
+	Global.batDamageZone = $BatDealDamageArea
+	
+	if is_on_floor() and dead:
+		await get_tree().create_timer(3.0).timeout
+		self.queue_free()
+		
 	move(delta)
 	handle_animation()
 
@@ -45,11 +56,24 @@ func _on_timer_timeout() -> void:
 
 func handle_animation():
 	var animated_sprite = $AnimatedSprite2D
-	animated_sprite.play("fly")
-	if dir.x == -1:
-		animated_sprite.flip_h = true
-	elif dir.x == 1:
-		animated_sprite.flip_h = false
+	if !dead and !taking_damage:
+		animated_sprite.play("fly")
+		if dir.x == -1:
+			animated_sprite.flip_h = true
+		elif dir.x == 1:
+				animated_sprite.flip_h = false
+	elif !dead and taking_damage:
+		animated_sprite.play("hurt")
+		await get_tree().create_timer(0.8).timeout 
+		taking_damage = false
+	elif dead and is_roaming:
+		is_roaming = false
+		animated_sprite.play("death")
+		set_collision_layer_value(1, true)
+		set_collision_layer_value(2, false)
+		set_collision_mask_value(1, true)
+		set_collision_mask_value(2, false)
+		
 
 func choose(array):
 	array.shuffle()

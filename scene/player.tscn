@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://c4ej17gt58q4g"]
+[gd_scene load_steps=64 format=3 uid="uid://c4ej17gt58q4g"]
 
 [ext_resource type="Texture2D" uid="uid://bxrw8fmfm3vx0" path="res://art/Dacian Warrior Animated Pixel-Art 2D/Attack/50x50/Attack 0-1 Sprite Sheet.png" id="1_2fvbb"]
 [ext_resource type="Script" uid="uid://c3sugbe24ht57" path="res://script/player.gd" id="1_ml7e8"]
@@ -412,15 +412,20 @@ radius = 6.0827627
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ml7e8"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ml7e8"]
+radius = 7.0
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_ml7e8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0fmm8")
 animation = &"air_attack"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 14)
+position = Vector2(0, 13)
 shape = SubResource("CircleShape2D_ihjo1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -438,4 +443,13 @@ position = Vector2(14, 1)
 shape = SubResource("CircleShape2D_ml7e8")
 disabled = true
 
+[node name="PlayerHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_ml7e8")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="PlayerHitbox" to="." method="_on_player_hitbox_area_entered"]
