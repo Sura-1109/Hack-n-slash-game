@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://44bwks4lj58e"]
+[gd_scene load_steps=14 format=3 uid="uid://44bwks4lj58e"]
 
 [ext_resource type="Texture2D" uid="uid://dvvyb41pl7xey" path="res://art/House village bg/TileSet-36x36.png" id="1_51t2l"]
 [ext_resource type="Texture2D" uid="uid://fkn616kse0th" path="res://art/House village bg/Background.png" id="1_bla6t"]
@@ -66,6 +66,12 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_puu8m")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqper"]
+size = Vector2(182.5, 601)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrc23"]
+size = Vector2(68.99477, 120.41216)
+
 [node name="LobbyLevel" type="Node2D"]
 position = Vector2(-182, 362)
 script = ExtResource("1_qrc23")
@@ -101,10 +107,29 @@ texture = ExtResource("5_qrc23")
 position = Vector2(198, 103)
 polygon = PackedVector2Array(11, -1, 125, -2, 125, -34, 154, -34, 161, -50, 159, -68, 161, -97, 244, -97, 247, -38, 273, -33, 281, 0, 309, -2, 309, 59, 311, 74, 376, 74, 375, 95, 414, 97, 417, 63, 448, 61, 445, 30, 510, 31, 481, 3, 479, -64, 479, -96, 500, -94, 503, -65, 555, -64, 733, -63, 735, -99, 763, -99, 766, -129, 766, -164, 797, -163, 798, -189, 975, -191, 1295, -193, 1299, 139, 3, 149)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
+position = Vector2(105.75, -44)
+shape = SubResource("RectangleShape2D_oqper")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions"]
+position = Vector2(1575, -45)
+shape = SubResource("RectangleShape2D_oqper")
+
 [node name="player" parent="." instance=ExtResource("6_8omh8")]
 position = Vector2(398, -118)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(566, 43)
-scale = Vector2(1500, 700)
+position = Vector2(566, 36)
+rotation = 2.8623853
+scale = Vector2(40000, 5772.223)
 zoom = Vector2(1.5, 1.5)
+limit_enabled = false
+
+[node name="StartGameDetection" type="Area2D" parent="."]
+rotation = 0.001039704
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartGameDetection"]
+position = Vector2(766.94556, -28.589355)
+shape = SubResource("RectangleShape2D_qrc23")
+
+[connection signal="body_entered" from="StartGameDetection" to="." method="_on_start_game_detection_body_entered"]

@@ -89,3 +89,6 @@ polygon = PackedVector2Array(4, 241, 611, 244, 610, -12, 437, -39, 307, -27, 247
 
 [node name="BatEnemy2" parent="." instance=ExtResource("5_6w5wr")]
 position = Vector2(202, 202)
+
+[node name="BatEnemy3" parent="." instance=ExtResource("5_6w5wr")]
+position = Vector2(367, 180)

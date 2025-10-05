@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var deal_damage_zone = $DealDamageZone
 
@@ -159,6 +161,11 @@ func take_damage(damage):
 func handle_hurt():
 	animated_sprite.play("hurt")  # Make sure you have this animation
 	
+	# Knockback away from bat
+	var bat_position = Global.batDamageZone.global_position
+	var knockback_dir = (global_position - bat_position).normalized()
+	velocity = knockback_dir * 200  # Adjust strength
+	
 	# Brief invincibility after getting hit
 	await get_tree().create_timer(0.8).timeout
 	taking_damage = false
@@ -166,13 +173,9 @@ func handle_hurt():
 
 func handle_death():
 	animated_sprite.play("death")  # Make sure you have this animation
-	
+	Global.playerAlive = false
 	# Disable collision with enemies
 	set_collision_layer_value(1, true)
 	set_collision_layer_value(2, false)
 	set_collision_mask_value(1, true)
 	set_collision_mask_value(2, false)
-	
-	# Optional: reload scene or show game over
-	await get_tree().create_timer(2.0).timeout
-	get_tree().reload_current_scene()  # or change to game over scene
