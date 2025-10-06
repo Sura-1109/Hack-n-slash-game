@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://44bwks4lj58e"]
+[gd_scene load_steps=15 format=3 uid="uid://44bwks4lj58e"]
 
 [ext_resource type="Texture2D" uid="uid://dvvyb41pl7xey" path="res://art/House village bg/TileSet-36x36.png" id="1_51t2l"]
 [ext_resource type="Texture2D" uid="uid://fkn616kse0th" path="res://art/House village bg/Background.png" id="1_bla6t"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://qolwlxuf3lqy" path="res://art/House village bg/House1.png" id="4_8omh8"]
 [ext_resource type="Texture2D" uid="uid://dxqwls5fnxfh0" path="res://art/House village bg/Tree1.png" id="5_qrc23"]
 [ext_resource type="PackedScene" uid="uid://c4ej17gt58q4g" path="res://scene/player.tscn" id="6_8omh8"]
+[ext_resource type="AudioStream" uid="uid://csxvn1dvi7psf" path="res://sfx/lobby music 1.mp3" id="8_oqper"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8omh8"]
 texture = ExtResource("2_sujef")
@@ -131,5 +132,10 @@ rotation = 0.001039704
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartGameDetection"]
 position = Vector2(766.94556, -28.589355)
 shape = SubResource("RectangleShape2D_qrc23")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_oqper")
+volume_db = 24.0
+autoplay = true
 
 [connection signal="body_entered" from="StartGameDetection" to="." method="_on_start_game_detection_body_entered"]

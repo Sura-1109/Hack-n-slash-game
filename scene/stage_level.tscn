@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://3xp4rkx6myw1"]
+[gd_scene load_steps=11 format=3 uid="uid://3xp4rkx6myw1"]
 
 [ext_resource type="Script" uid="uid://dag2b70u1j3yl" path="res://script/stage_level.gd" id="1_7v8tb"]
 [ext_resource type="Texture2D" uid="uid://fkn616kse0th" path="res://art/House village bg/Background.png" id="1_ntm8w"]
 [ext_resource type="Texture2D" uid="uid://dvvyb41pl7xey" path="res://art/House village bg/TileSet-36x36.png" id="2_7or21"]
 [ext_resource type="PackedScene" uid="uid://c4ej17gt58q4g" path="res://scene/player.tscn" id="3_7or21"]
 [ext_resource type="PackedScene" uid="uid://beojdxhvgl4qo" path="res://scene/bat_enemy.tscn" id="5_6w5wr"]
+[ext_resource type="PackedScene" uid="uid://dbqf6w1yr827m" path="res://scene/toxic_frog.tscn" id="6_p17kx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7v8tb"]
 texture = ExtResource("2_7or21")
@@ -92,3 +93,6 @@ position = Vector2(202, 202)
 
 [node name="BatEnemy3" parent="." instance=ExtResource("5_6w5wr")]
 position = Vector2(367, 180)
+
+[node name="toxicFrog" parent="." instance=ExtResource("6_p17kx")]
+position = Vector2(159, 224)
