@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name BatEnemy
 
 
-const speed = 300
+const speed = 250
 var dir: Vector2
 
 var is_bat_chase: bool
